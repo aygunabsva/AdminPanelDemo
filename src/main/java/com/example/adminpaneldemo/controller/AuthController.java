@@ -1,12 +1,16 @@
 package com.example.adminpaneldemo.controller;
 
-import com.example.adminpaneldemo.dto.request.UsersRegisterDTO;
-import com.example.adminpaneldemo.dto.response.UsersDTO;
+import com.example.adminpaneldemo.dto.request.LoginRequestDto;
+import com.example.adminpaneldemo.dto.request.RegisterRequestDto;
+import com.example.adminpaneldemo.dto.response.UserResponseDto;
+import com.example.adminpaneldemo.entity.Users;
 import com.example.adminpaneldemo.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,7 +20,14 @@ public class AuthController {
 
     @PostMapping("/sign-in")
     @ResponseStatus(HttpStatus.CREATED)
-    public UsersDTO register(@RequestBody @Valid UsersRegisterDTO customerRegisterDTO) {
+    public UserResponseDto register(@RequestBody @Valid RegisterRequestDto customerRegisterDTO) {
         return authService.register(customerRegisterDTO);
     }
+
+    @ResponseBody
+    @PostMapping("/log-in")
+    public Optional<Users> login(@RequestBody @Valid LoginRequestDto loginReq) {
+        return authService.authenticate(loginReq);
+    }
+
 }

@@ -13,18 +13,19 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String surName;
-    private String password;
+
+    private String firstName;
+    private String lastName;
     private String email;
+    private String password;
+    private String phoneNumber;
+    private String workplace;
+    private String photoUrl;
+    private boolean termsAccepted;
+    private String otp;
+    private boolean otpVerified;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "authority_name", referencedColumnName = "name")
+    @JoinColumn(name = "authority")
     private Authority authority;
-
-    public Users(String email, String password, Authority authority) {
-        this.email = email;
-        this.password = password;
-        this.authority = authority;
-    }
 }
