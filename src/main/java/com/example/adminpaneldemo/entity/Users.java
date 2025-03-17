@@ -28,4 +28,9 @@ public class Users {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "authority")
     private Authority authority;
+
+    public Users(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

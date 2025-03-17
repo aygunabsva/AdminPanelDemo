@@ -8,6 +8,7 @@ import com.example.adminpaneldemo.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -26,8 +27,9 @@ public class AuthController {
 
     @ResponseBody
     @PostMapping("/log-in")
-    public Optional<Users> login(@RequestBody @Valid LoginRequestDto loginReq) {
+    public ResponseEntity<?> login(@RequestBody @Valid LoginRequestDto loginReq) {
         return authService.authenticate(loginReq);
     }
+
 
 }
