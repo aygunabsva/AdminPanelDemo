@@ -22,8 +22,8 @@ public class Users {
     private String workplace;
     private String photoUrl;
     private boolean termsAccepted;
-    private String otp;
-    private boolean otpVerified;
+    private String verificationToken;
+    private boolean verified;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "authority")

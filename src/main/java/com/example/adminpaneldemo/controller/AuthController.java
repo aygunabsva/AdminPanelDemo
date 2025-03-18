@@ -2,6 +2,7 @@ package com.example.adminpaneldemo.controller;
 
 import com.example.adminpaneldemo.dto.request.LoginRequestDto;
 import com.example.adminpaneldemo.dto.request.RegisterRequestDto;
+import com.example.adminpaneldemo.dto.request.VerifyEmailDto;
 import com.example.adminpaneldemo.dto.response.UserResponseDto;
 import com.example.adminpaneldemo.entity.Users;
 import com.example.adminpaneldemo.service.AuthService;
@@ -23,6 +24,12 @@ public class AuthController {
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDto register(@RequestBody @Valid RegisterRequestDto customerRegisterDTO) {
         return authService.register(customerRegisterDTO);
+    }
+
+    @PostMapping("/verify")
+    public ResponseEntity<String> verifyEmail(@RequestBody VerifyEmailDto verifyEmailDto) {
+        boolean verified = authService.verifyEmail(verifyEmailDto);
+        return verified ? ResponseEntity.ok("Email verified successfully.") : ResponseEntity.badRequest().body("Invalid token or email.");
     }
 
     @ResponseBody
